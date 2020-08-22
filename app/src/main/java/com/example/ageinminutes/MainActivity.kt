@@ -56,7 +56,14 @@ class MainActivity : AppCompatActivity() {
 
                 tvSelectedDateInMinutes.text = differenceInMinutes.toString()
 
-                // Challenge 2 start: add calculation to also show age in days
+                // Challenge 2 completed: add calculation to also show age in days
+                val selectedDateInDays = selectedDateInMinutes /60 /24 //"danger Will Robinson"
+
+                val currentDateToDays = currentDateToMinutes /60 /24
+
+                val differenceInDays = currentDateToDays - selectedDateInDays
+
+                tvSelectedDateInDays.text = differenceInDays.toString()
             },
             year,
             month,
