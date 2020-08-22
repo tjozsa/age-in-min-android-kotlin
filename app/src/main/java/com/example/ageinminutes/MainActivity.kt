@@ -55,6 +55,8 @@ class MainActivity : AppCompatActivity() {
                 val differenceInMinutes = currentDateToMinutes - selectedDateInMinutes
 
                 tvSelectedDateInMinutes.text = differenceInMinutes.toString()
+
+                // Challenge 2 start: add calculation to also show age in days
             },
             year,
             month,
