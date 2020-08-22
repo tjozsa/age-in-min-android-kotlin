@@ -47,4 +47,8 @@
         android:textSize="20sp"
         android:text="SELECT DATE" />
 
+    <!--
+        Challenge: replicate the rest of the UI from the screenshot.
+    -->
+
 </LinearLayout>
