@@ -30,23 +30,37 @@ class MainActivity : AppCompatActivity() {
         val day = myCalendar.get(Calendar.DAY_OF_MONTH)
 
 
-        DatePickerDialog(this,
-            DatePickerDialog.OnDateSetListener {
-                    view, selectedYear, selectedMonth, selectedDay ->
+        val dpd = DatePickerDialog(
+            this,
+            DatePickerDialog.OnDateSetListener { view, selectedYear, selectedMonth, selectedDay ->
                 // whatever we put here, it will be executed once the date picker has been closed
                 // you can use this to use the selected date.
 
                 val selectedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear"
-                tvSelectedDate.setText(selectedDate)
+                tvSelectedDate.text = selectedDate
                 Toast.makeText(this, selectedDate, Toast.LENGTH_LONG).show()
                 // toast is only shown if you select a date, not if you tap cancel.
 
                 val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
 
                 val theDate = sdf.parse(selectedDate)
+
+                // how much time has passed since the down of unixtime
+                val selectedDateInMinutes = theDate!!.time / 60000 //"danger Will Robinson"
+
+                val currentDate = sdf.parse(sdf.format(System.currentTimeMillis()))
+
+                val currentDateToMinutes = currentDate!!.time / 60000
+
+                val differenceInMinutes = currentDateToMinutes - selectedDateInMinutes
+
+                tvSelectedDateInMinutes.text = differenceInMinutes.toString()
             },
             year,
             month,
-            day).show()
+            day
+        )
+        dpd.datePicker.maxDate = Date().time - 86400000 //milliseconds in one day
+        dpd.show()
     }
 }
