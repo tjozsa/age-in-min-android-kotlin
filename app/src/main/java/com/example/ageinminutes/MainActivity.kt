@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
+import java.text.SimpleDateFormat
 import java.time.Year
 import java.util.*
 
@@ -31,11 +32,18 @@ class MainActivity : AppCompatActivity() {
 
         DatePickerDialog(this,
             DatePickerDialog.OnDateSetListener {
-                    view, year, month, day ->
+                    view, selectedYear, selectedMonth, selectedDay ->
                 // whatever we put here, it will be executed once the date picker has been closed
                 // you can use this to use the selected date.
-                Toast.makeText(this, ""+year +""+month+""+day, Toast.LENGTH_LONG).show()
+
+                val selectedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear"
+                tvSelectedDate.setText(selectedDate)
+                Toast.makeText(this, selectedDate, Toast.LENGTH_LONG).show()
                 // toast is only shown if you select a date, not if you tap cancel.
+
+                val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+
+                val theDate = sdf.parse(selectedDate)
             },
             year,
             month,
